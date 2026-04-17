@@ -1,59 +1,211 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Saya</title>
-    <style>
-        body { font-family: sans-serif; line-height: 1.6; margin: 0; padding: 0; }
-        nav { background: #333; color: #fff; padding: 1rem; text-align: center; }
-        nav a { color: #fff; margin: 0 15px; text-decoration: none; }
-        section { padding: 20px; border-bottom: 1px solid #eee; }
-        .profile { text-align: center; }
-        .profile img { border-radius: 50%; width: 150px; height: 150px; object-fit: cover; }
-        .gallery { display: flex; overflow-x: auto; gap: 10px; padding: 10px 0; }
-        .gallery img { width: 300px; height: 200px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
-        footer { background: #f4f4f4; padding: 20px; text-align: center; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio | Ben</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body { 
+    font-family: 'Inter', -apple-system, sans-serif; 
+    margin: 0; 
+    padding: 40px 10px;
+    display: flex;
+    justify-content: center;
+
+    /* 🌈 Liquid gradient background */
+    background: linear-gradient(135deg, #89f7fe, #374e6d, #c3cfe2);
+    background-size: 300% 300%;
+    animation: gradientMove 12s ease infinite;
+}
+
+/* animasi background biar “hidup” */
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* 🔳 Container utama (Glass) */
+.paper {
+    width: 100%;
+    max-width: 1000px; /* ⬅️ diperbesar */
+    padding: 70px;     /* ⬅️ lebih lega */
+
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.25);
+
+    box-shadow: 
+        0 10px 40px rgba(0,0,0,0.2),
+        inset 0 0 10px rgba(255,255,255,0.2);
+}
+
+/* Header */
+header {
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+    padding-bottom: 30px;
+    margin-bottom: 40px;
+}
+
+.profile-img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+
+    border: 2px solid rgba(255,255,255,0.5);
+}
+
+h1 { 
+    margin: 0; 
+    font-size: 2.4rem; 
+    color: #fff;
+}
+
+.subtitle { 
+    color: rgba(255,255,255,0.8); 
+}
+
+/* Section Title */
+h2 { 
+    font-size: 1.2rem; 
+    text-transform: uppercase; 
+    color: #fff;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+h2::after {
+    content: "";
+    flex: 1;
+    margin-left: 15px;
+    height: 1px;
+    background: rgba(255,255,255,0.3);
+}
+
+/* Grid */
+.content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    margin-bottom: 40px;
+}
+
+/* List */
+.info-box ul {
+    list-style: none;
+    padding: 0;
+}
+
+.info-box li {
+    margin-bottom: 10px;
+    padding-left: 15px;
+    position: relative;
+    color: #fff;
+}
+
+.info-box li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #00eaff;
+}
+
+/* Gallery */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.gallery img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 10px;
+
+    filter: grayscale(20%);
+    transition: 0.3s;
+
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.gallery img:hover {
+    filter: grayscale(0%);
+    transform: scale(1.03);
+}
+
+/* Footer */
+footer {
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255,255,255,0.3);
+    text-align: center;
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.8);
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .paper { padding: 30px 20px; }
+    .content-grid { grid-template-columns: 1fr; }
+    .gallery { grid-template-columns: 1fr; }
+}
+</style>
 </head>
+
 <body>
 
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-    </nav>
+<div class="paper">
+    <header>
+        <img src="ALBANI.jpeg" class="profile-img">
+        <h1>BEN</h1>
+        <p class="subtitle">Informatics Student & Creative Maker</p>
+    </header>
 
-    <section class="profile" id="home">
-        <img src="ALBANI.jpeg" alt="Foto Profil">
-        <h1>Ben</h1>
-        <p>Informatics Student | Creative Maker</p>
-    </section>
+    <div class="content-grid">
+        <div class="info-box">
+            <h2>Technical Skills</h2>
+            <ul>
+                <li><strong>Programming:</strong> Java, HTML, CSS</li>
+                <li><strong>3D Work:</strong> 3D Modeling & Design</li>
+            </ul>
+        </div>
 
-    <section id="skills">
-        <h2>Skill & Projects</h2>
-        <ul>
-            <li><strong>Programming:</strong> Java, HTML, CSS</li>
-            <li><strong>Creative:</strong> 3d design, painting, 2d design</li>
-            <li><strong>Project:</strong> 3d design </li>
-        </ul>
-    </section>
+        <div class="info-box">
+            <h2>Creative Skills</h2>
+            <ul>
+                <li>2D Digital Design</li>
+                <li>Traditional Painting</li>
+                <li>Visual Arts</li>
+            </ul>
+        </div>
+    </div>
 
-    <section id="projects">
+    <div>
         <h2>Portfolio Gallery</h2>
         <div class="gallery">
-            <img src="lorong.jpg" alt="Work 1">
-            <img src="parfum.jpg" alt="Work 2">
-            <img src="Y2K.jpg" alt="Work 3">
-            <img src="pp.jpg" alt="Work 4">
+            <img src="lorong.jpg">
+            <img src="parfum.jpg">
+            <img src="Y2K.jpg">
+            <img src="pp.jpg">
         </div>
-    </section>
+    </div>
 
-    <footer id="contact">
-        <h2>Kontak</h2>
-        <p>instagram: albanisayidina13</p>
-        <p>Lokasi: Klaten, Indonesia</p>
+    <footer>
+        📍 Klaten, Indonesia | 📸 @albanisayidina13
     </footer>
+</div>
 
 </body>
 </html>
