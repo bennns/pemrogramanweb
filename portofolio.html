@@ -6,209 +6,281 @@
 <title>Portfolio | Ben</title>
 
 <style>
+/* ===== ROOT ===== */
 :root {
-    --glass-bg: rgba(255, 255, 255, 0.1);
-    --glass-border: rgba(255, 255, 255, 0.2);
-    --accent: #00eaff;
-    --text: #fff;
+    --bg1:#0a0f1f;
+    --bg2:#121a33;
+    --accent:#7fe7ff;
+    --accent2:#b58cff;
+
+    --glass:rgba(255,255,255,0.08);
+    --border:rgba(255,255,255,0.15);
+
+    --text:#ffffff;
+    --text-soft:rgba(255,255,255,0.7);
 }
 
-body {
+/* ===== RESET ===== */
+*{
     margin:0;
-    font-family: sans-serif;
-    color: var(--text);
-    background: linear-gradient(45deg,#0f172a,#1e293b,#334155);
+    padding:0;
+    box-sizing:border-box;
 }
 
-nav {
-    position: fixed;
-    top:0;
-    width:100%;
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:system-ui, sans-serif;
+    color:var(--text);
+    background:
+        radial-gradient(circle at 20% 20%, rgba(127,231,255,0.15), transparent),
+        radial-gradient(circle at 80% 10%, rgba(181,140,255,0.15), transparent),
+        linear-gradient(135deg,var(--bg1),var(--bg2));
+}
+
+/* ===== GLASS ===== */
+.glass{
+    background:var(--glass);
+    backdrop-filter:blur(18px);
+    border:1px solid var(--border);
+    border-radius:20px;
+    box-shadow:0 10px 40px rgba(0,0,0,0.3);
+}
+
+/* ===== NAV ===== */
+nav{
+    position:fixed;
+    top:20px;
+    left:50%;
+    transform:translateX(-50%);
     display:flex;
-    justify-content:center;
-    gap:30px;
-    padding:15px;
-    backdrop-filter: blur(10px);
-    background: rgba(0,0,0,0.3);
+    gap:10px;
+    padding:8px;
     z-index:100;
 }
 
-nav a {
-    color:white;
+nav a{
     text-decoration:none;
-    font-weight:500;
+    color:var(--text-soft);
+    padding:8px 14px;
+    border-radius:12px;
     transition:.3s;
 }
-nav a:hover { color: var(--accent); }
 
-.container {
-    max-width:900px;
+nav a:hover{
+    color:var(--accent);
+    background:rgba(255,255,255,0.1);
+}
+
+/* ===== LAYOUT ===== */
+.container{
+    max-width:1000px;
     margin:auto;
-    padding:120px 20px;
+    padding:120px 20px 40px;
 }
 
-
-header { text-align:center; }
-.profile-img {
-    width:150px;
-    height:150px;
-    border-radius:70%;
+section{
+    margin-bottom:60px;
+    opacity:0;
+    transform:translateY(30px);
+    transition:.6s;
 }
 
-.grid {
+section.show{
+    opacity:1;
+    transform:none;
+}
+
+/* ===== HEADER ===== */
+header{
+    text-align:center;
+    padding:30px;
+}
+
+.profile{
+    width:140px;
+    height:140px;
+    margin:auto;
+    margin-bottom:20px;
+    border-radius:50%;
+    overflow:hidden;
+}
+
+.profile img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+h1{
+    font-size:3rem;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.subtitle{
+    color:var(--text-soft);
+}
+
+/* ===== GRID ===== */
+.grid{
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:20px;
 }
 
+.card{
+    padding:20px;
+}
 
-.gallery {
+.card h3{
+    margin-bottom:10px;
+}
+
+.card ul{
+    padding-left:20px;
+    color:var(--text-soft);
+}
+
+/* ===== GALLERY ===== */
+.gallery{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-    gap:15px;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
 }
 
-.card {
-    background:var(--glass-bg);
-    border:1px solid var(--glass-border);
-    border-radius:15px;
-    overflow:hidden;
-    transition:.3s;
-}
-
-.card:hover {
-    transform:translateY(-5px);
-}
-
-.card img {
+.gallery img{
     width:100%;
-    height:200px;
+    height:180px;
     object-fit:cover;
+    border-radius:14px;
 }
 
-.desc {
-    padding:15px;
-    font-size:0.85rem;
-    color:#ddd;
+.desc{
+    margin-top:10px;
+    font-size:.9rem;
+    color:var(--text-soft);
 }
 
-
-form {
+/* ===== FORM ===== */
+form{
     display:flex;
     flex-direction:column;
-    gap:10px;
+    gap:12px;
 }
 
-input, textarea {
-    padding:10px;
-    border:none;
-    border-radius:8px;
+input, textarea{
+    padding:12px;
+    border-radius:12px;
+    border:1px solid var(--border);
+    background:rgba(255,255,255,0.05);
+    color:white;
 }
 
-button {
-    padding:10px;
+button{
+    padding:12px;
     border:none;
-    background:var(--accent);
-    color:black;
+    border-radius:12px;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
     font-weight:bold;
     cursor:pointer;
 }
 
-footer {
+/* ===== FOOTER ===== */
+footer{
     text-align:center;
-    margin-top:40px;
-    opacity:.7;
+    color:var(--text-soft);
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:768px){
+    .grid{
+        grid-template-columns:1fr;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<nav>
+<nav class="glass">
     <a href="#home">Home</a>
+    <a href="#skills">Skills</a>
     <a href="#gallery">Portfolio</a>
     <a href="#contact">Contact</a>
 </nav>
 
 <div class="container">
 
-<section id="home">
-<header>
-    <img src="ALBANI.jpeg" class="profile-img">
+<section id="home" class="show">
+<header class="glass">
+    <div class="profile">
+        <img src="ALBANI.jpeg" alt="Ben">
+    </div>
     <h1>BEN</h1>
-    <p>Informatics Student & Creative Maker</p>
+    <p class="subtitle">Informatics Student & Creative Maker</p>
 </header>
 </section>
 
-<section class="grid">
-    <div>
+<section id="skills">
+<div class="grid">
+    <div class="glass card">
         <h3>Technical</h3>
         <ul>
             <li>Java, HTML, CSS</li>
             <li>3D Modeling</li>
         </ul>
     </div>
-    <div>
+    <div class="glass card">
         <h3>Creative</h3>
         <ul>
             <li>2D Design</li>
             <li>Painting</li>
         </ul>
     </div>
+</div>
 </section>
 
 <section id="gallery">
 <h2>Portfolio</h2>
-
 <div class="gallery">
 
-<div class="card">
+<div class="glass card">
     <img src="lorong.jpg">
-    <div class="desc">
-        <b>3D Environment - Lorong</b><br>
-        Scene 3D dengan perspektif kuat (vanishing point), lighting gelap, 
-        dan tekstur realistis. Cocok untuk game atau film thriller.
-    </div>
+    <div class="desc">3D Environment - Lorong</div>
 </div>
 
-<div class="card">
+<div class="glass card">
     <img src="pp.jpg">
-    <div class="desc">
-        <b>3D Product - Botol Floating</b><br>
-        Render produk dengan depth of field, refleksi kaca realistis, 
-        dan komposisi melayang yang modern.
-    </div>
+    <div class="desc">3D Product - Botol</div>
 </div>
 
-<div class="card">
+<div class="glass card">
     <img src="parfum.jpg">
-    <div class="desc">
-        <b>3D Product - Parfum</b><br>
-        Hero object dengan lighting natural, material kaca & matte 
-        untuk kesan premium.
-    </div>
+    <div class="desc">3D Product - Parfum</div>
 </div>
 
-<div class="card">
+<div class="glass card">
     <img src="Y2K.jpg">
-    <div class="desc">
-        <b>Design Y2K</b><br>
-        Gaya visual retro futuristik dengan warna cerah dan vibe digital 2000an.
-    </div>
+    <div class="desc">Design Y2K</div>
 </div>
 
 </div>
 </section>
 
 <section id="contact">
-<h2>Contact Me</h2>
-
+<h2>Contact</h2>
+<div class="glass card">
 <form>
     <input type="text" placeholder="Nama">
     <input type="email" placeholder="Email">
     <textarea placeholder="Pesan"></textarea>
     <button>Kirim</button>
 </form>
+</div>
 </section>
 
 <footer>
@@ -216,6 +288,20 @@ footer {
 </footer>
 
 </div>
+
+<script>
+const sections = document.querySelectorAll("section");
+
+const observer = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+        if(e.isIntersecting){
+            e.target.classList.add("show");
+        }
+    });
+},{threshold:0.2});
+
+sections.forEach(sec=>observer.observe(sec));
+</script>
 
 </body>
 </html>
