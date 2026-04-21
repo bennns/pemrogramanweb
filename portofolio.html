@@ -1,301 +1,579 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio | Ben</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALBANI_CYBER_SPACE_V2</title>
+    <style>
+        /* Custom Properties */
+        :root {
+            --neon-pink: #ff00ff;
+            --neon-blue: #00ffff;
+            --neon-green: #39ff14;
+            --cyber-yellow: #fff200;
+            --win-blue: #000080;
+            --win-gray: #c0c0c0;
+            --bg-dark: #050505;
+        }
 
-<style>
-:root {
-    --bg1:#0a0f1f;
-    --bg2:#121a33;
-    --accent:#7fe7ff;
-    --accent2:#b58cff;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', Courier, monospace;
+            cursor: crosshair; /* Custom cursor vibe */
+        }
 
-    --glass:rgba(255,255,255,0.08);
-    --border:rgba(255,255,255,0.15);
+        html {
+            scroll-behavior: smooth;
+        }
 
-    --text:#ffffff;
-    --text-soft:rgba(255,255,255,0.7);
-}
+        body {
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(255, 0, 255, 0.05) 0%, transparent 80%),
+                linear-gradient(rgba(57, 255, 20, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(57, 255, 20, 0.05) 1px, transparent 1px);
+            background-size: 100% 100%, 40px 40px, 40px 40px;
+            color: white;
+            overflow-x: hidden;
+        }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+        /* Scanline Effect */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 9999;
+            background-size: 100% 4px, 3px 100%;
+            pointer-events: none;
+        }
 
-html{
-    scroll-behavior:smooth;
-}
+        /* Animations */
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(1deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
 
-body{
-    font-family:system-ui, sans-serif;
-    color:var(--text);
-    background:
-        radial-gradient(circle at 20% 20%, rgba(127,231,255,0.15), transparent),
-        radial-gradient(circle at 80% 10%, rgba(181,140,255,0.15), transparent),
-        linear-gradient(135deg,var(--bg1),var(--bg2));
-}
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
 
-.glass{
-    background:var(--glass);
-    backdrop-filter:blur(18px);
-    border:1px solid var(--border);
-    border-radius:20px;
-    box-shadow:0 10px 40px rgba(0,0,0,0.3);
-}
+        /* Navigation */
+        nav {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 10000;
+            background: rgba(0, 0, 0, 0.8);
+            border-bottom: 2px solid var(--neon-blue);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+        }
 
+        nav .nav-container {
+            display: flex;
+            gap: 10px;
+        }
 
-nav{
-    position:fixed;
-    top:20px;
-    left:50%;
-    transform:translateX(-50%);
-    display:flex;
-    gap:10px;
-    padding:8px;
-    z-index:100;
-}
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border: 1px solid var(--neon-pink);
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
 
-nav a{
-    text-decoration:none;
-    color:var(--text-soft);
-    padding:8px 14px;
-    border-radius:12px;
-    transition:.3s;
-}
+        nav a:hover {
+            background: var(--neon-pink);
+            color: black;
+            box-shadow: 0 0 15px var(--neon-pink);
+        }
 
-nav a:hover{
-    color:var(--accent);
-    background:rgba(255,255,255,0.1);
-}
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding-top: 50px;
+        }
 
-.container{
-    max-width:1000px;
-    margin:auto;
-    padding:120px 20px 40px;
-}
+        .profile-wrapper {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            animation: float 4s ease-in-out infinite;
+        }
 
-section{
-    margin-bottom:60px;
-    opacity:0;
-    transform:translateY(30px);
-    transition:.6s;
-}
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: 4px solid var(--neon-green);
+            box-shadow: 15px 15px 0 var(--neon-pink);
+            filter: grayscale(0.5) contrast(1.2);
+            transition: filter 0.3s;
+        }
 
-section.show{
-    opacity:1;
-    transform:none;
-}
+        .profile-img:hover {
+            filter: grayscale(0) contrast(1.2);
+        }
 
+        .hero h1 {
+            margin-top: 40px;
+            font-size: clamp(2rem, 8vw, 4rem);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: var(--neon-blue);
+            text-shadow: 3px 3px 0 var(--neon-pink);
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border: 2px solid white;
+        }
 
-header{
-    text-align:center;
-    padding:30px;
-}
+        .typewriter {
+            font-size: 1.2rem;
+            color: var(--neon-green);
+            margin-top: 15px;
+        }
 
-.profile{
-    width:140px;
-    height:140px;
-    margin:auto;
-    margin-bottom:20px;
-    border-radius:50%;
-    overflow:hidden;
-}
+        .typewriter::after {
+            content: "|";
+            animation: blink 0.7s infinite;
+        }
 
-.profile img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
+        /* Classic Window Style */
+        .window {
+            background: var(--win-gray);
+            border: 3px solid #ffffff;
+            border-right-color: #404040;
+            border-bottom-color: #404040;
+            box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.5);
+            max-width: 950px;
+            margin: 100px auto;
+            position: relative;
+            transition: transform 0.3s;
+        }
 
-h1{
-    font-size:3rem;
-    background:linear-gradient(135deg,var(--accent),var(--accent2));
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-}
+        .window:hover {
+            transform: scale(1.01);
+        }
 
-.subtitle{
-    color:var(--text-soft);
-}
+        .window-header {
+            background: linear-gradient(90deg, var(--win-blue), #1084d0);
+            color: white;
+            padding: 5px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+        }
 
-.grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:20px;
-}
+        .window-controls {
+            display: flex;
+            gap: 5px;
+        }
 
-.card{
-    padding:20px;
-}
+        .win-btn {
+            width: 16px;
+            height: 14px;
+            background: var(--win-gray);
+            border: 1px solid white;
+            border-right-color: #404040;
+            border-bottom-color: #404040;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            font-size: 10px;
+            font-weight: bold;
+        }
 
-.card h3{
-    margin-bottom:10px;
-}
+        .window-body {
+            padding: 25px;
+            border: 2px inset white;
+            color: black;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
 
-.card ul{
-    padding-left:20px;
-    color:var(--text-soft);
-}
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
 
-/* ===== GALLERY ===== */
-.gallery{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
-}
+        .skill-chip {
+            background: #eee;
+            border: 2px solid black;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            box-shadow: 4px 4px 0 var(--neon-blue);
+            transition: 0.2s;
+        }
 
-.gallery img{
-    width:100%;
-    height:180px;
-    object-fit:cover;
-    border-radius:14px;
-}
+        .skill-chip:hover {
+            background: var(--cyber-yellow);
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 black;
+        }
 
-.desc{
-    margin-top:10px;
-    font-size:.9rem;
-    color:var(--text-soft);
-}
+        /* Project Cards Redesign */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
 
-/* ===== FORM ===== */
-form{
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-}
+        .card {
+            background: white;
+            border: 2px solid black;
+            padding: 10px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
 
-input, textarea{
-    padding:12px;
-    border-radius:12px;
-    border:1px solid var(--border);
-    background:rgba(255,255,255,0.05);
-    color:white;
-}
+        .card:hover {
+            background: var(--cyber-yellow);
+            transform: translate(-5px, -5px);
+            box-shadow: 7px 7px 0 black;
+        }
 
-button{
-    padding:12px;
-    border:none;
-    border-radius:12px;
-    background:linear-gradient(135deg,var(--accent),var(--accent2));
-    font-weight:bold;
-    cursor:pointer;
-}
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border: 1px solid black;
+            margin-bottom: 15px;
+        }
 
-footer{
-    text-align:center;
-    color:var(--text-soft);
-}
+        .card-tag {
+            background: black;
+            color: white;
+            display: inline-block;
+            padding: 2px 8px;
+            font-size: 0.7rem;
+            margin-bottom: 10px;
+        }
 
-@media(max-width:768px){
-    .grid{
-        grid-template-columns:1fr;
-    }
-}
-</style>
+        /* Interactive Elements */
+        .sticker {
+            position: absolute;
+            background: var(--neon-green);
+            color: black;
+            padding: 5px 10px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            transform: rotate(-15deg);
+            border: 2px solid black;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--win-gray);
+            border: 2px solid white;
+            border-right-color: #404040;
+            border-bottom-color: #404040;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 999;
+        }
+
+        .visualizer {
+            display: flex;
+            gap: 2px;
+            align-items: flex-end;
+            height: 20px;
+        }
+
+        .bar {
+            width: 3px;
+            background: var(--win-blue);
+            animation: barHeight 1s infinite ease-in-out;
+        }
+
+        @keyframes barHeight {
+            0%, 100% { height: 5px; }
+            50% { height: 20px; }
+        }
+
+        /* Form Controls */
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid black;
+            background: #fff;
+            box-shadow: inset 2px 2px 0 #808080;
+            font-family: inherit;
+        }
+
+        .submit-btn {
+            background: var(--win-gray);
+            border: 2px solid white;
+            border-right-color: black;
+            border-bottom-color: black;
+            padding: 10px 25px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: all 0.1s;
+        }
+
+        .submit-btn:active {
+            border: 2px solid black;
+            border-right-color: white;
+            border-bottom-color: white;
+            transform: translate(2px, 2px);
+        }
+
+        .marquee-footer {
+            background: var(--neon-blue);
+            color: black;
+            padding: 15px 0;
+            font-weight: bold;
+            border-top: 3px solid black;
+            border-bottom: 3px solid black;
+            margin-top: 50px;
+        }
+
+        /* Scroll Animation Class */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero { height: auto; padding: 120px 20px; }
+            .profile-wrapper { width: 200px; height: 200px; }
+            .window { margin: 50px 15px; }
+        }
+    </style>
 </head>
-
 <body>
 
-<nav class="glass">
-    <a href="#home">Home</a>
-    <a href="#skills">Skills</a>
-    <a href="#gallery">Portfolio</a>
-    <a href="#contact">Contact</a>
-</nav>
+    <!-- Navigator -->
+    <nav>
+        <div class="nav-container">
+            <a href="#home">/START</a>
+            <a href="#about">/INFO</a>
+            <a href="#projects">/WORK</a>
+            <a href="#contact">/MAIL</a>
+        </div>
+    </nav>
 
-<div class="container">
-
-<section id="home" class="show">
-<header class="glass">
-    <div class="profile">
-        <img src="ALBANI.jpeg" alt="Ben">
+    <!-- Music Player (Visual Decor) -->
+    <div class="music-player">
+        <div class="visualizer">
+            <div class="bar" style="animation-delay: 0.1s"></div>
+            <div class="bar" style="animation-delay: 0.3s"></div>
+            <div class="bar" style="animation-delay: 0.2s"></div>
+            <div class="bar" style="animation-delay: 0.4s"></div>
+        </div>
+        <audio controls autoplay muted style="display: none;">
+        <source src="sinaran.mp3" type="audio/mpeg">
+    </audio>
+        <div style="font-size: 0.7rem; color: black;">
+            PLAYING: Y2K_VIBES.MP3
+        </div>
+        <div class="win-btn">▶</div>
     </div>
-    <h1>Albani Sayidina</h1>
-    <h2>241110106</h2>
-    <p class="subtitle">Informatics Student & Creative Maker</p>
-</header>
-</section>
 
-<section id="skills">
-<div class="grid">
-    <div class="glass card">
-        <h3>Technical</h3>
-        <ul>
-            <li>Java, HTML, CSS</li>
-            <li>3D Modeling</li>
-        </ul>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="profile-wrapper">
+            <div class="sticker" style="top: -10px; right: -20px; background: var(--cyber-yellow);">NEW_GEN</div>
+            <img src="ALBANI.jpeg" alt="Albani" class="profile-img">
+            <div class="sticker" style="bottom: 10px; left: -30px;">ID: 241110106</div>
+        </div>
+        <h1>ALBANI_SAYIDINA</h1>
+        <div class="typewriter">SYSTEM.LOAD("INFORMATIKA_STUDENT")...</div>
+    </section>
+
+    <!-- About & Skills Section -->
+    <section id="about" class="reveal">
+        <div class="window">
+            <div class="window-header">
+                <span>C:\USERS\ALBANI\README.TXT</span>
+                <div class="window-controls">
+                    <div class="win-btn">_</div>
+                    <div class="win-btn">□</div>
+                    <div class="win-btn" style="background: #ff5f5f;">X</div>
+                </div>
+            </div>
+            <div class="window-body">
+                <h2 style="margin-bottom: 15px; border-bottom: 2px solid black;">PROFILE_SUMMARY</h2>
+                <p><strong>NAMA:</strong> ALBANI SAYIDINA</p>
+                <p><strong>NIM:</strong> 241110106</p>
+                <p><strong>STATUS:</strong> ACTIVE_MAHASISWA_INFORMATIKA</p>
+                <p style="margin-top: 20px; line-height: 1.6;">
+                    Menjelajahi dunia digital sejak awal semester. Fokus utama pada pengembangan antarmuka web yang unik dan interaktif. Terobsesi dengan estetika retro-futurisme dan pemrograman berbasis sistem.
+                </p>
+
+                <h2 style="margin: 30px 0 15px 0; border-bottom: 2px solid black;">TECH_SKILLS.DLL</h2>
+                <div class="skills-grid">
+                    <div class="skill-chip">3D MODELING</div>
+                    <div class="skill-chip">JAVASCRIPT</div>
+                    <div class="skill-chip">PHOTOHOP</div>
+                    <div class="skill-chip">C++</div>
+                    <div class="skill-chip">HTML/CSS</div>
+                    <div class="skill-chip">SQL</div>
+                    <div class="skill-chip">BLENDER</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="reveal">
+        <div class="window">
+            <div class="window-header">
+                <span>C:\DRIVE_D\PORTFOLIO_ALBANI\ALBANI.EXE</span>
+                <div class="window-controls">
+                    <div class="win-btn">_</div>
+                    <div class="win-btn">□</div>
+                    <div class="win-btn">X</div>
+                </div>
+            </div>
+            <div class="window-body">
+                <div class="projects-grid">
+                    <!-- Project 1 -->
+                    <div class="card">
+                        <span class="card-tag">3D_RENDER</span>
+                        <img src="parfum.jpg" alt="Parfum Project">
+                        <h3>Aura Essence</h3>
+                        <p style="font-size: 0.8rem; margin: 10px 0;">Digital branding project focusing on light refraction and product placement.</p>
+                        <button class="submit-btn" style="width: 100%; font-size: 0.7rem;">VIEW_DETAILS</button>
+                    </div>
+                    <!-- Project 2 -->
+                    <div class="card">
+                        <span class="card-tag">VIRTUAL_SPACE</span>
+                        <img src="lorong.jpg" alt="Lorong Project">
+                        <h3>Cyber Hallway</h3>
+                        <p style="font-size: 0.8rem; margin: 10px 0;">Visualizing Liminal Spaces through a Y2K aesthetic lens.</p>
+                        <button class="submit-btn" style="width: 100%; font-size: 0.7rem;">VIEW_DETAILS</button>
+                    </div>
+
+                    <div class="card">
+                        <span class="card-tag">PARFUME BOTTLE</span>
+                        <img src="pp.jpg" alt="Liquid Project">
+                        <h3>Gravity Zero</h3>
+                        <p style="font-size: 0.8rem; margin: 10px 0;">Experimenting with floating objects and transparent materials.</p>
+                        <button class="submit-btn" style="width: 100%; font-size: 0.7rem;">VIEW_DETAILS</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="reveal">
+        <div class="window" style="max-width: 600px;">
+            <div class="window-header">
+                <span>C:\NETWORK\OUTLOOK_EXPRESS.EXE</span>
+                <div class="window-controls">
+                    <div class="win-btn">X</div>
+                </div>
+            </div>
+            <div class="window-body">
+                <form onsubmit="event.preventDefault();">
+                    <div class="input-group">
+                        <label>FROM:</label>
+                        <input type="text" placeholder="Your_Name_Here">
+                    </div>
+                    <div class="input-group">
+                        <label>SUBJECT:</label>
+                        <input type="text" placeholder="Inquiry / Collaboration">
+                    </div>
+                    <div class="input-group">
+                        <label>MESSAGE_BODY:</label>
+                        <textarea rows="6" placeholder="Write your transmission..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">TRANSMIT_DATA</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <div class="marquee-footer">
+        <marquee scrollamount="10">
+            +++ CONNECTING TO SERVER... OK +++ ALBANI_SAYIDINA // 241110106 // INFORMATIKA +++ NO_SYSTEM_IS_SAFE +++ ESTABLISHED_2026 +++
+        </marquee>
     </div>
-    <div class="glass card">
-        <h3>Creative</h3>
-        <ul>
-            <li>2D Design</li>
-            <li>Painting</li>
-        </ul>
-    </div>
-</div>
-</section>
 
-<section id="gallery">
-<h2>Portfolio</h2>
-<div class="gallery">
+    <footer style="text-align: center; padding: 20px; font-size: 0.7rem; background: black;">
+        <p>BEST VIEWED IN INTERNET EXPLORER 6.0 | 800x600 RESOLUTION</p>
+        <p style="margin-top: 5px; color: var(--neon-pink);">©2026 ALBANI SAYIDINA</p>
+    </footer>
 
-<div class="glass card">
-    <img src="lorong.jpg">
-    <div class="desc">3D Environment - Lorong</div>
-</div>
-
-<div class="glass card">
-    <img src="pp.jpg">
-    <div class="desc">3D Product - Botol</div>
-</div>
-
-<div class="glass card">
-    <img src="parfum.jpg">
-    <div class="desc">3D Product - Parfum</div>
-</div>
-
-<div class="glass card">
-    <img src="Y2K.jpg">
-    <div class="desc">Design Y2K</div>
-</div>
-
-</div>
-</section>
-
-<section id="contact">
-<h2>Contact</h2>
-<div class="glass card">
-<form>
-    <input type="text" placeholder="Nama">
-    <input type="email" placeholder="Email">
-    <textarea placeholder="Pesan"></textarea>
-    <button>Kirim</button>
-</form>
-</div>
-</section>
-
-<footer>
-📍 Klaten | @albanisayidina13
-</footer>
-
-</div>
-
-<script>
-const sections = document.querySelectorAll("section");
-
-const observer = new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-        if(e.isIntersecting){
-            e.target.classList.add("show");
+    <script>
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
         }
-    });
-},{threshold:0.2});
 
-sections.forEach(sec=>observer.observe(sec));
-</script>
+        window.addEventListener("scroll", reveal);
 
+        const text = 'SYSTEM.LOAD("INFORMATIKA_STUDENT")...';
+        let index = 0;
+        const typewriterElement = document.querySelector('.typewriter');
+        typewriterElement.innerHTML = '';
+
+        function type() {
+            if (index < text.length) {
+                typewriterElement.innerHTML += text.charAt(index);
+                index++;
+                setTimeout(type, 100);
+            }
+        }
+
+        window.onload = () => {
+            type();
+            reveal();
+        };
+    </script>
 </body>
 </html>
