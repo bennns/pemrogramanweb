@@ -2,27 +2,305 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Latihan 2 - List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Space Gallery V2</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #050505;
+            --win-bg: #c0c0c0;
+            --win-border-light: #ffffff;
+            --win-border-dark: #808080;
+            --accent-blue: #000080;
+            --accent-pink: #ff00ff;
+            --accent-cyan: #00ffff;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+                linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06)),
+                linear-gradient(to bottom, #111 1px, transparent 1px),
+                linear-gradient(to right, #111 1px, transparent 1px);
+            background-size: 100% 4px, 3px 100%, 40px 40px, 40px 40px;
+            font-family: 'Courier Prime', monospace;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            z-index: 100;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+
+        .nav-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .nav-item {
+            border: 1px solid var(--accent-pink);
+            padding: 5px 15px;
+            background: black;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .nav-item:hover {
+            background: var(--accent-pink);
+            color: black;
+            box-shadow: 0 0 10px var(--accent-pink);
+        }
+
+        .window-container {
+            width: 100%;
+            max-width: 1000px;
+            background: var(--win-bg);
+            border: 3px solid;
+            border-color: var(--win-border-light) var(--win-border-dark) var(--win-border-dark) var(--win-border-light);
+            padding: 3px;
+            box-shadow: 5px 5px 0px rgba(0,0,0,0.5);
+        }
+
+        .title-bar {
+            background: linear-gradient(90deg, #000080, #1084d0);
+            padding: 3px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        .window-controls {
+            display: flex;
+            gap: 2px;
+        }
+
+        .control-btn {
+            width: 16px;
+            height: 14px;
+            background: var(--win-bg);
+            border: 1px solid;
+            border-color: var(--win-border-light) var(--win-border-dark) var(--win-border-dark) var(--win-border-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            font-size: 10px;
+        }
+
+        /* Content Area *
+        .content-area {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 30px 20px;
+            background: #d4d4d4; 
+            border: 1px inset #808080;
+        }
+
+        .gallery-card {
+            background: white;
+            border: 2px solid #808080;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            position: relative;
+        }
+
+        .card-highlight {
+            background: #ffff00; 
+            border: 2px solid black;
+            box-shadow: 8px 8px 0px black;
+            transform: scale(1.05);
+            z-index: 10;
+        }
+
+        .card-tag {
+            background: black;
+            color: white;
+            padding: 2px 8px;
+            font-size: 10px;
+            display: inline-block;
+            width: fit-content;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: #eee;
+            border: 1px solid #ccc;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .image-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: contrast(1.1) brightness(0.9);
+        }
+
+        .card-title {
+            color: black;
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 5px;
+        }
+
+        .card-desc {
+            color: #333;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        .view-btn {
+            margin-top: auto;
+            border: 1px solid #000;
+            background: #ccc;
+            color: black;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 4px;
+            text-align: center;
+            box-shadow: inset 1px 1px 0 white, inset -1px -1px 0 #808080;
+            cursor: pointer;
+        }
+
+        .view-btn:active {
+            box-shadow: inset -1px -1px 0 white, inset 1px 1px 0 #808080;
+        }
+
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--win-bg);
+            border: 2px solid;
+            border-color: var(--win-border-light) var(--win-border-dark) var(--win-border-dark) var(--win-border-light);
+            padding: 5px 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: black;
+            font-size: 11px;
+            z-index: 1000;
+        }
+
+        .viz-bars {
+            display: flex;
+            align-items: flex-end;
+            gap: 2px;
+            height: 15px;
+        }
+
+        .bar {
+            width: 3px;
+            background: var(--accent-blue);
+            animation: bounce 0.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes bounce {
+            from { height: 3px; }
+            to { height: 12px; }
+        }
+    </style>
 </head>
 <body>
 
-    <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3czhuYmttODYyaHFoZjV5ZDltM29nOTE5ejB5cjhvMnludmwzcmZnZCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/s2pr9CVOvU4NMBsnYf/giphy.gif" alt="description" width="200">
+    <div class="nav-container">
+        <a href="index.html" class="nav-item">/INDEX</a>
+        <a href="nav.html" class="nav-item">/INFO</a>
+        <a href="list.html" class="nav-item">/WORK</a>
+        <a href="form.html" class="nav-item">/MAIL</a>
+    </div>
 
-    <h2>Portfolio</h2>
-    <p>Description of the portfolio items.</p>
-    <ul>
-        <li>Project 1</li>
-        <li>Project 2</li>
-        <li>Project 3</li>
-    </ul>
+    <div class="window-container">
+        <div class="title-bar">
+            <span>C:\DRIVE_D\PORTFOLIO_ALBANI\ALBANI.EXE</span>
+            <div class="window-controls">
+                <div class="control-btn">_</div>
+                <div class="control-btn">□</div>
+                <div class="control-btn">×</div>
+            </div>
+        </div>
 
-    <h2>Education</h2>
-    <p>Details about educational background.</p>
-    <ol>
-        <li>School 1</li>
-        <li>School 2</li>
-        <li>School 3</li>
-    </ol>
+        <div class="content-area">
+            <div class="gallery-card">
+                <span class="card-tag">3D_RENDER</span>
+                <div class="image-placeholder">
+                    <img src="pp" alt="3D Render">
+                </div>
+                <h3 class="card-title">Aura Essence</h3>
+                <p class="card-desc">Digital branding project focusing on light refraction and product placement.</p>
+                <div class="view-btn">VIEW_DETAILS</div>
+            </div>
 
+            <div class="gallery-card card-highlight">
+                <span class="card-tag">VIRTUAL_SPACE</span>
+                <div class="image-placeholder">
+                    <img src="lorong.jpg" alt="Cyber Hallway">
+                </div>
+                <h3 class="card-title">Cyber Hallway</h3>
+                <p class="card-desc">Visualizing Liminal Spaces through a Y2K aesthetic lens.</p>
+                <div class="view-btn">VIEW_DETAILS</div>
+            </div>
+
+            <div class="gallery-card">
+                <span class="card-tag">PARFUME_BOTTLE</span>
+                <div class="image-placeholder">
+                    <img src="parfum.jpg" alt="Gravity Zero">
+                </div>
+                <h3 class="card-title">Gravity Zero</h3>
+                <p class="card-desc">Experimenting with floating objects and transparent materials.</p>
+                <div class="view-btn">VIEW_DETAILS</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="music-player">
+        <div class="viz-bars">
+            <div class="bar" style="animation-delay: 0.1s"></div>
+            <div class="bar" style="animation-delay: 0.3s"></div>
+            <div class="bar" style="animation-delay: 0.2s"></div>
+            <div class="bar" style="animation-delay: 0.4s"></div>
+        </div>
+        <span>PLAYING: Y2K_VIBES.MP3</span>
+        <div class="control-btn" style="width: 20px">▶</div>
+    </div>
+
+    <script>
+        const bars = document.querySelectorAll('.bar');
+        setInterval(() => {
+            bars.forEach(bar => {
+                const height = Math.floor(Math.random() * 12) + 3;
+                bar.style.height = height + 'px';
+            });
+        }, 150);
+    </script>
 </body>
 </html>
