@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ALBANI_CYBER_SPACE_V2</title>
     <style>
-        /* Custom Properties */
         :root {
             --neon-pink: #ff00ff;
             --neon-blue: #00ffff;
@@ -21,7 +20,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Courier New', Courier, monospace;
-            cursor: crosshair; /* Custom cursor vibe */
+            cursor: crosshair; 
         }
 
         html {
@@ -39,7 +38,6 @@
             overflow-x: hidden;
         }
 
-        /* Scanline Effect */
         body::before {
             content: " ";
             display: block;
@@ -51,7 +49,6 @@
             pointer-events: none;
         }
 
-        /* Animations */
         @keyframes float {
             0% { transform: translateY(0px) rotate(0deg); }
             50% { transform: translateY(-15px) rotate(1deg); }
@@ -63,7 +60,6 @@
             50% { opacity: 0; }
         }
 
-        /* Navigation */
         nav {
             position: fixed;
             width: 100%;
@@ -99,7 +95,6 @@
             box-shadow: 0 0 15px var(--neon-pink);
         }
 
-        /* Hero Section */
         .hero {
             height: 100vh;
             display: flex;
@@ -154,7 +149,6 @@
             animation: blink 0.7s infinite;
         }
 
-        /* Classic Window Style */
         .window {
             background: var(--win-gray);
             border: 3px solid #ffffff;
@@ -209,7 +203,6 @@
             overflow-y: auto;
         }
 
-        /* Skills Section */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -233,7 +226,6 @@
             box-shadow: 2px 2px 0 black;
         }
 
-        /* Project Cards Redesign */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -272,7 +264,6 @@
             margin-bottom: 10px;
         }
 
-        /* Interactive Elements */
         .sticker {
             position: absolute;
             background: var(--neon-green);
@@ -319,7 +310,6 @@
             50% { height: 20px; }
         }
 
-        /* Form Controls */
         .input-group {
             margin-bottom: 15px;
         }
@@ -368,7 +358,6 @@
             margin-top: 50px;
         }
 
-        /* Scroll Animation Class */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -380,7 +369,6 @@
             transform: translateY(0);
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .hero { height: auto; padding: 120px 20px; }
             .profile-wrapper { width: 200px; height: 200px; }
@@ -390,17 +378,15 @@
 </head>
 <body>
 
-    <!-- Navigator -->
     <nav>
         <div class="nav-container">
-            <a href="#home">/START</a>
-            <a href="#about">/INFO</a>
-            <a href="#projects">/WORK</a>
-            <a href="#contact">/MAIL</a>
+            <a href="#index.html">/START</a>
+            <a href="#list.html">/INFO</a>
+            <a href="#nav.html">/WORK</a>
+            <a href="form.html">/MAIL</a>
         </div>
     </nav>
 
-    <!-- Music Player (Visual Decor) -->
     <div class="music-player">
         <div class="visualizer">
             <div class="bar" style="animation-delay: 0.1s"></div>
@@ -417,7 +403,6 @@
         <div class="win-btn">▶</div>
     </div>
 
-    <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="profile-wrapper">
             <div class="sticker" style="top: -10px; right: -20px; background: var(--cyber-yellow);">NEW_GEN</div>
@@ -428,7 +413,6 @@
         <div class="typewriter">SYSTEM.LOAD("INFORMATIKA_STUDENT")...</div>
     </section>
 
-    <!-- About & Skills Section -->
     <section id="about" class="reveal">
         <div class="window">
             <div class="window-header">
@@ -474,7 +458,6 @@
             </div>
             <div class="window-body">
                 <div class="projects-grid">
-                    <!-- Project 1 -->
                     <div class="card">
                         <span class="card-tag">3D_RENDER</span>
                         <img src="parfum.jpg" alt="Parfum Project">
@@ -482,7 +465,7 @@
                         <p style="font-size: 0.8rem; margin: 10px 0;">Digital branding project focusing on light refraction and product placement.</p>
                         <button class="submit-btn" style="width: 100%; font-size: 0.7rem;">VIEW_DETAILS</button>
                     </div>
-                    <!-- Project 2 -->
+
                     <div class="card">
                         <span class="card-tag">VIRTUAL_SPACE</span>
                         <img src="lorong.jpg" alt="Lorong Project">
