@@ -1,0 +1,17 @@
+body {
+            background-color: #05070a;
+            color: #ffffff;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+        }
+        .liquid-glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+        }
+        .hero-banner {
+            background: linear-gradient(rgba(5,7,10,0.6), rgba(5,7,10,0.6)), 
+                        url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&q=80&w=1200');
+            background-size: cover;
+            background-position: center;
+        }

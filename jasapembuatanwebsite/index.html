@@ -4,31 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Benwebs | Jasa Website Liquid</title>
+    <link rel="stylesheet" href="style.css]">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #05070a;
-            color: #ffffff;
-            font-family: 'Segoe UI', Roboto, sans-serif;
-        }
-        .liquid-glass {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-        }
-        .hero-banner {
-            background: linear-gradient(rgba(5,7,10,0.6), rgba(5,7,10,0.6)), 
-                        url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&q=80&w=1200');
-            background-size: cover;
-            background-position: center;
-        }
-    </style>
 </head>
 <body>
 
-    <!-- 1. HEADER (Logo & Navigasi) -->
     <header class="fixed w-full top-0 z-50 p-4">
         <nav class="max-w-6xl mx-auto liquid-glass px-6 py-4 flex justify-between items-center">
             <div class="text-xl font-bold tracking-tighter">BEN<span class="text-blue-500">WEBS</span></div>
@@ -41,7 +22,6 @@
         </nav>
     </header>
 
-    <!-- 2. HERO SECTION (Banner, Headline, Search Form) -->
     <section id="home" class="hero-banner min-h-screen flex items-center justify-center px-6 pt-20">
         <div class="text-center space-y-8 max-w-3xl">
             <h1 class="text-5xl md:text-7xl font-black leading-tight">Solusi Website <br><span class="text-blue-500">Masa Depan</span></h1>
@@ -55,7 +35,6 @@
         </div>
     </section>
 
-    <!-- 3. BODY (Konten Utama) -->
     <section id="layanan" class="py-24 px-6 max-w-6xl mx-auto">
         <div class="text-center mb-16">
             <h2 class="text-3xl font-bold">Layanan Kami</h2>
@@ -80,14 +59,13 @@
         </div>
     </section>
 
-    <!-- 4. CONTACT (Form Kontak & WhatsApp Button) -->
+
     <section id="kontak" class="py-24 px-6 bg-white/5">
         <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-12 items-center">
             <div>
                 <h2 class="text-4xl font-bold mb-6">Mulai Proyek?</h2>
                 <p class="text-gray-400 mb-8">Konsultasikan kebutuhan digital Anda sekarang secara gratis.</p>
                 
-                <!-- WhatsApp Button -->
                 <a href="https://wa.me/6281299001100" class="inline-flex items-center gap-3 bg-green-600 hover:bg-green-500 px-8 py-4 rounded-2xl font-bold text-lg transition shadow-xl">
                     <i class="fab fa-whatsapp text-2xl"></i>
                     Chat WhatsApp
@@ -104,7 +82,6 @@
         </div>
     </section>
 
-    <!-- 5. FOOTER (Informasi Tambahan & Kontak Singkat) -->
     <footer class="py-12 border-t border-white/10 px-6">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="text-center md:text-left">
