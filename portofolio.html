@@ -3,219 +3,486 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio | Ben</title>
+<title>Portfolio | Albani Sayidina</title>
 
 <style>
 :root {
-    --glass-bg: rgba(255, 255, 255, 0.1);
-    --glass-border: rgba(255, 255, 255, 0.2);
+    --glass: rgba(255,255,255,0.1);
+    --border: rgba(255,255,255,0.2);
     --accent: #00eaff;
     --text: #fff;
 }
 
+* { 
+    margin:0; 
+    padding:0; 
+    box-sizing:border-box;
+}
+
 body {
-    margin:0;
-    font-family: sans-serif;
-    color: var(--text);
-    background: linear-gradient(45deg,#0f172a,#1e293b,#334155);
+    font-family:system-ui,-apple-system,sans-serif;
+    color:var(--text);
+    background:linear-gradient(135deg,#0f172a 0%,#1e293b 50%,#334155 100%);
+    line-height:1.6;
+    overflow-x:hidden;
 }
 
 nav {
-    position: fixed;
-    top:0;
-    width:100%;
+    position:fixed;
+    top:20px;
+    left:50%;
+    transform:translateX(-50%);
     display:flex;
-    justify-content:center;
-    gap:30px;
-    padding:15px;
-    backdrop-filter: blur(10px);
-    background: rgba(0,0,0,0.3);
+    gap:2rem;
+    padding:1rem 2rem;
+    background:rgba(0,0,0,0.4);
+    backdrop-filter:blur(20px);
+    border:1px solid var(--border);
+    border-radius:50px;
     z-index:100;
+    transition:all .3s ease;
 }
 
-nav a {
-    color:white;
+nav:hover{box-shadow:0 10px 30px rgba(0,234,255,0.3)}
+
+nav a{
+    color:var(--text);
     text-decoration:none;
     font-weight:500;
-    transition:.3s;
+    position:relative;
+    padding:0.5rem 1rem;
+    transition:all .3s ease;
 }
-nav a:hover { color: var(--accent); }
 
-.container {
+nav a:hover{
+    color:var(--accent);
+    transform:scale(1.05)
+}
+
+.container{
     max-width:900px;
     margin:auto;
-    padding:120px 20px;
+    padding:140px 1rem 4rem;
 }
 
-
-header { text-align:center; }
-.profile-img {
-    width:150px;
-    height:150px;
-    border-radius:70%;
+section{
+    opacity:0;
+    transform:translateY(40px);
+    transition:all .6s ease;
 }
 
-.grid {
+section.show{
+    opacity:1;
+    transform:translateY(0)
+}
+
+.profile{
+    width:160px;
+    height:160px;
+    border-radius:50%;
+    border:2px solid var(--border);
+    margin:0 auto 2rem;
+    display:block;
+    transition:all .4s ease;
+    cursor:pointer;
+    animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+    0%,100%{box-shadow:0 0 20px rgba(0,234,255,0.3)}
+    50%{box-shadow:0 0 40px rgba(0,234,255,0.6)}
+}
+
+.profile:hover{
+    transform:scale(1.1);
+    box-shadow:0 0 50px var(--accent)
+}
+
+h1{
+    text-align:center;
+    font-size:2.8rem;
+    background:linear-gradient(45deg,var(--accent),#00d4ff);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    margin-bottom:0.5rem
+}
+
+.subtitle{
+    text-align:center;
+    font-size:1.2rem;
+    opacity:.9;
+    margin-bottom:3rem
+}
+
+h2{
+    text-align:center;
+    font-size:2rem;
+    margin:3rem 0 2rem;
+    color:var(--accent)
+}
+
+.grid{
     display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:20px;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:2rem;
+    margin:3rem 0
 }
 
+.skill-box,.card{
+    background:var(--glass);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:1.5rem;
+    transition:all .3s ease;
+    cursor:pointer
+}
 
-.gallery {
+.skill-box:hover,.card:hover{
+    transform:translateY(-12px);
+    box-shadow:0 20px 40px rgba(0,0,0,0.4),0 0 20px rgba(0,234,255,0.3)
+}
+
+.skill-box h3{
+    color:var(--accent);
+    margin-bottom:1rem;
+    font-size:1.2rem
+}
+
+.skill-box ul{list-style:none}
+.skill-box li{padding:0.3rem 0;opacity:.8}
+
+.gallery{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-    gap:15px;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:1.5rem;
+    margin-top:2rem
 }
 
-.card {
-    background:var(--glass-bg);
-    border:1px solid var(--glass-border);
-    border-radius:15px;
-    overflow:hidden;
-    transition:.3s;
-}
-
-.card:hover {
-    transform:translateY(-5px);
-}
-
-.card img {
+.card img{
     width:100%;
     height:200px;
     object-fit:cover;
+    border-radius:12px;
+    transition:.3s ease
 }
 
-.desc {
-    padding:15px;
-    font-size:0.85rem;
-    color:#ddd;
+.card:hover img{transform:scale(1.05)}
+
+.card-text{
+    padding:1rem 0 0;
+    font-size:.9rem
 }
 
+.card-text strong{color:var(--accent)}
 
-form {
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.95);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:200;
+    opacity:0;
+    transition:opacity .3s ease
+}
+
+.modal.show{
     display:flex;
-    flex-direction:column;
-    gap:10px;
+    opacity:1
 }
 
-input, textarea {
-    padding:10px;
-    border:none;
-    border-radius:8px;
+.modal img{
+    max-width:90vw;
+    max-height:90vh;
+    border-radius:12px;
+    transform:scale(.8);
+    transition:all .3s ease
 }
 
-button {
-    padding:10px;
+.modal.show img{transform:scale(1)}
+
+.close{
+    position:absolute;
+    top:2rem;
+    right:2rem;
+    color:var(--text);
+    font-size:2.5rem;
+    cursor:pointer;
+    width:40px;
+    height:40px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    transition:.3s ease;
+    z-index:201
+}
+
+.close:hover{
+    background:var(--glass);
+    transform:rotate(90deg)
+}
+
+form{
+    max-width:500px;
+    margin:4rem auto;
+    background:var(--glass);
+    padding:2rem;
+    border-radius:20px;
+    border:1px solid var(--border);
+    backdrop-filter:blur(10px)
+}
+
+input,textarea{
+    width:100%;
+    padding:1rem;
+    border:1px solid var(--border);
+    border-radius:10px;
+    background:rgba(255,255,255,0.05);
+    color:var(--text);
+    font-size:1rem;
+    margin-bottom:1rem;
+    transition:.3s ease
+}
+
+input:focus,textarea:focus{
+    outline:none;
+    border-color:var(--accent);
+    box-shadow:0 0 15px rgba(0,234,255,0.3)
+}
+
+button{
+    width:100%;
+    padding:1rem;
     border:none;
     background:var(--accent);
-    color:black;
-    font-weight:bold;
+    color:#000;
+    font-weight:600;
+    border-radius:10px;
+    font-size:1rem;
     cursor:pointer;
+    transition:.3s ease
 }
 
-footer {
-    text-align:center;
-    margin-top:40px;
+button:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(0,234,255,0.4)
+}
+
+button:disabled{
     opacity:.7;
+    cursor:not-allowed;
+    transform:none
+}
+
+.success{
+    background:rgba(0,255,100,.2);
+    border:1px solid rgba(0,255,100,.5);
+    color:#0f0;
+    padding:1rem;
+    border-radius:10px;
+    text-align:center;
+    margin-top:1rem;
+    display:none;
+    animation:pop .4s ease
+}
+
+@keyframes pop{
+    0%{transform:scale(0)}
+    50%{transform:scale(1.1)}
+    100%{transform:scale(1)}
+}
+
+footer{
+    text-align:center;
+    padding:3rem 1rem;
+    opacity:.8;
+    font-size:.95rem
+}
+
+@media(max-width:768px){
+    nav{gap:1rem;padding:.8rem 1rem;flex-wrap:wrap}
+    h1{font-size:2rem}
+    .grid{grid-template-columns:1fr}
+    .container{padding:120px 1rem 3rem}
 }
 </style>
 </head>
 
 <body>
+<div class="modal" id="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img id="modalImg" src="" alt="">
+</div>
 
-<nav>
-    <a href="#home">Home</a>
-    <a href="#gallery">Portfolio</a>
-    <a href="#contact">Contact</a>
-</nav>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html">/START</a>
+            <a href="portofolio.html">/INFO</a>
+            <a href="list.html">/PORTOFOLIO</a>
+            <a href="form.html">/CONTACT</a>
+        </div>
+    </nav>
 
 <div class="container">
-
 <section id="home">
-<header>
-    <img src="ALBANI.jpeg" class="profile-img">
-    <h1>BEN</h1>
-    <p>Informatics Student & Creative Maker</p>
-</header>
+    <img src="ALBANI.jpeg" class="profile" alt="Albani Sayidina" 
+         onclick="this.style.transform='rotate(360deg)';setTimeout(()=>this.style.transform='',800)">
+    <h1>Albani Sayidina</h1>
+    <p class="subtitle">Informatics Student & Creative Maker</p>
 </section>
 
-<section class="grid">
-    <div>
-        <h3>Technical</h3>
+<section id="skills" class="grid">
+    <div class="skill-box">
+        <h3>Technical Skills</h3>
         <ul>
-            <li>Java, HTML, CSS</li>
+            <li>JavaScript</li>
+            <li>HTML/CSS</li>
             <li>3D Modeling</li>
+            <li>2D DESIGNER</li>
         </ul>
     </div>
-    <div>
-        <h3>Creative</h3>
+    <div class="skill-box">
+        <h3>Creative Skills</h3>
         <ul>
             <li>2D Design</li>
             <li>Painting</li>
+            <li>UI/UX</li>
         </ul>
     </div>
 </section>
 
 <section id="gallery">
-<h2>Portfolio</h2>
-
-<div class="gallery">
-
-<div class="card">
-    <img src="lorong.jpg">
-    <div class="desc">
-        <b>3D Environment - Lorong</b><br>
-        Scene 3D dengan perspektif kuat (vanishing point), lighting gelap, 
-        dan tekstur realistis. Cocok untuk game atau film thriller.
+    <h2>Portfolio</h2>
+    <div class="gallery">
+        <div class="card" onclick="openModal('lorong.jpg','3D Lorong')">
+            <img src="lorong.jpg" alt="3D Lorong">
+            <div class="card-text">
+                <strong>3D Lorong</strong><br>Thriller environment
+            </div>
+        </div>
+        <div class="card" onclick="openModal('pp.jpg','Botol 3D')">
+            <img src="pp.jpg" alt="Botol 3D">
+            <div class="card-text">
+                <strong>Botol 3D</strong><br>Product render
+            </div>
+        </div>
+        <div class="card" onclick="openModal('parfum.jpg','Parfum 3D')">
+            <img src="parfum.jpg" alt="Parfum 3D">
+            <div class="card-text">
+                <strong>Parfum 3D</strong><br>Premium glass
+            </div>
+        </div>
+        <div class="card" onclick="openModal('Y2K.jpg','Y2K Design')">
+            <img src="Y2K.jpg" alt="Y2K Design">
+            <div class="card-text">
+                <strong>Y2K Design</strong><br>Retro aesthetic
+            </div>
+        </div>
     </div>
-</div>
-
-<div class="card">
-    <img src="pp.jpg">
-    <div class="desc">
-        <b>3D Product - Botol Floating</b><br>
-        Render produk dengan depth of field, refleksi kaca realistis, 
-        dan komposisi melayang yang modern.
-    </div>
-</div>
-
-<div class="card">
-    <img src="parfum.jpg">
-    <div class="desc">
-        <b>3D Product - Parfum</b><br>
-        Hero object dengan lighting natural, material kaca & matte 
-        untuk kesan premium.
-    </div>
-</div>
-
-<div class="card">
-    <img src="Y2K.jpg">
-    <div class="desc">
-        <b>Design Y2K</b><br>
-        Gaya visual retro futuristik dengan warna cerah dan vibe digital 2000an.
-    </div>
-</div>
-
-</div>
 </section>
 
 <section id="contact">
-<h2>Contact Me</h2>
-
-<form>
-    <input type="text" placeholder="Nama">
-    <input type="email" placeholder="Email">
-    <textarea placeholder="Pesan"></textarea>
-    <button>Kirim</button>
-</form>
+    <h2>Contact Me</h2>
+    <form id="contactForm">
+        <input type="text" placeholder="Nama Lengkap *" required>
+        <input type="email" placeholder="Email *" required>
+        <textarea placeholder="Pesan Anda *" rows="4" required></textarea>
+        <button type="submit">Kirim Pesan</button>
+    </form>
+    <div class="success" id="successMsg">✅ Pesan berhasil dikirim! Terima kasih!</div>
 </section>
 
 <footer>
-📍 Klaten | @albanisayidina13
+    📍 Klaten, Indonesia | @albanisayidina13
 </footer>
-
 </div>
 
+<script>
+'use strict';
+
+// Smooth scroll navigation
+document.querySelectorAll('nav a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+});
+
+let ticking = false;
+function updateScroll() {
+    document.querySelectorAll('section').forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+            section.classList.add('show');
+        }
+    });
+    ticking = false;
+}
+
+window.addEventListener('scroll', () => {
+    if (!ticking) {
+        requestAnimationFrame(updateScroll);
+        ticking = true;
+    }
+});
+
+const profileImg = document.querySelector('.profile');
+profileImg.addEventListener('click', function() {
+    this.style.transform = 'rotate(360deg)';
+    setTimeout(() => {
+        this.style.transform = '';
+    }, 800);
+});
+
+function openModal(src, alt) {
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modalImg');
+    modalImg.src = src;
+    modalImg.alt = alt;
+    modal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+    document.getElementById('modal').classList.remove('show');
+    document.body.style.overflow = '';
+}
+
+document.getElementById('modal').addEventListener('click', e => {
+    if (e.target.id === 'modal') closeModal();
+});
+
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+});
+
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const button = this.querySelector('button');
+    const originalText = button.textContent;
+    button.textContent = 'Mengirim...';
+    button.disabled = true;
+    
+    setTimeout(() => {
+        document.getElementById('successMsg').style.display = 'block';
+        button.textContent = originalText;
+        button.disabled = false;
+        this.reset();
+        
+        setTimeout(() => {
+            document.getElementById('successMsg').style.display = 'none';
+        }, 3000);
+    }, 1500);
+});
+
+// Initialize scroll on load
+updateScroll();
+</script>
 </body>
 </html>

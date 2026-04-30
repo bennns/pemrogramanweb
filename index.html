@@ -1,43 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+        body {
+            background-color: #c0c0c0; /* Background windows klasik */
+            font-family: 'VT323', monospace;
+            padding: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Button Style sangat akurat sesuai gambar */
+        .btn-transmit {
+            background: #c0c0c0;
+            /* Efek Outset Border Klasik */
+            border-top: 2px solid #ffffff;
+            border-left: 2px solid #ffffff;
+            border-bottom: 2px solid #000000;
+            border-right: 2px solid #000000;
+            
+            padding: 4px 25px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #000;
+            cursor: pointer;
+            outline: none;
+            box-shadow: 1px 1px 0px #444;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none; /* Menghilangkan underline jika menggunakan tag <a> */
+            display: inline-block;
+        }
+
+        .btn-transmit:active {
+            /* Efek Inset saat ditekan */
+            border-top: 2px solid #000000;
+            border-left: 2px solid #000000;
+            border-bottom: 2px solid #ffffff;
+            border-right: 2px solid #ffffff;
+            box-shadow: none;
+            transform: translate(1px, 1px);
+        }
+    </style>
 </head>
 <body>
-    <h1>albani sayidina</h1>
 
-    <p>informatika</p>
+    <!-- Menggunakan onclick untuk navigasi agar transisi terasa lebih natural setelah klik -->
+    <button class="btn-transmit" onclick="navigateToPortfolio()">
+        TRANSMIT_DATA
+    </button>
 
-    <div>
-        <p>bhapp</p>
-        <img src="https://tse2.mm.bing.net/th/id/OIP.M_q69-FiQXqQuG6Nd1fwjQHaHV?pid=Api&P=0&h=180" alt="Profile Picture">
-    </div>
-
-    <hr> <h3>Hobi Saya:</h3>
-    <ul>
-        <li>Coding</li>
-        <li>Belajar HTML</li>
-    </ul>
-
-    <p>Kunjungi <a href="https://github.com/bennns/pemrogramanweb">GitHub Saya</a></p>
-
-    <p>Status: <strong>Mahasiswa Aktif</strong></p>
-
-    <audio controls>
-        <source src="kicau jmania.ogg" type="audio/mpeg">
-    </audio>
-    <br><br>
-
-    <button type="button" onclick="alert('Halo!')">albani sayidina was here</button>
-
-    <br><br>
-
-    <form>
-        <label>Feedback:</label>
-        <input type="text" placeholder="Ketik pesan...">
-    </form>
+    <script>
+        function navigateToPortfolio() {
+            // Memberikan sedikit delay 100ms agar user bisa melihat efek tombol ditekan
+            setTimeout(() => {
+                window.location.href = 'portofolio.html';
+            }, 100);
+        }
+    </script>
 
 </body>
 </html>
