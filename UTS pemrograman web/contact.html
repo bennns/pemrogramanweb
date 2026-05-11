@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nusantara Kreatif | Contact</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">NK</span>
+        <span class="brand-text">
+          <strong>Nusantara Kreatif</strong>
+          <small>Company Profile</small>
+        </span>
+      </a>
+
+      <button class="menu-toggle" aria-label="Buka menu" aria-expanded="false">☰</button>
+
+      <nav class="nav" aria-label="Navigasi utama">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a class="active" href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <p class="eyebrow">Kontak kami</p>
+        <h1>Hubungi tim Nusantara Kreatif</h1>
+        <p class="lead">
+          Halaman ini bisa dipakai untuk kontak, layanan, atau informasi tambahan sesuai tema tugas.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container contact-grid">
+        <article class="card">
+          <h2>Informasi</h2>
+          <p><strong>Email:</strong> hello@nusantarakreatif.id</p>
+          <p><strong>Telepon:</strong> +62 812-3456-7890</p>
+          <p><strong>Alamat:</strong> Yogyakarta, Indonesia</p>
+        </article>
+
+        <form class="card contact-form" id="contactForm">
+          <h2>Kirim pesan</h2>
+          <label>
+            Nama
+            <input type="text" id="name" placeholder="Nama kamu" required />
+          </label>
+          <label>
+            Pesan
+            <textarea id="message" rows="5" placeholder="Tulis pesan singkat..." required></textarea>
+          </label>
+          <button type="submit" class="btn primary">Kirim</button>
+          <p class="form-note" id="formNote" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <p>© 2026 Nusantara Kreatif. All rights reserved.</p>
+      <p>Praktikum Pemrograman Web</p>
+    </div>
+  </footer>
+</body>
+</html>
+
